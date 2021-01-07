@@ -99,7 +99,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /index.html = anon
-                /test.html = anon
+<!--                /test.html = anon-->
                 # everything else requires authentication:
                 /** = authc
             </value>
