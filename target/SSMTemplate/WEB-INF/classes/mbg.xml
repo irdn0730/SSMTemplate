@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!DOCTYPE generatorConfiguration PUBLIC
+    "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="simple" targetRuntime="MyBatis3Simple">
+        <!-- 负责建立和数据库的连接-->
+        <jdbcConnection
+            driverClass="com.mysql.cj.jdbc.Driver"
+            connectionURL="jdbc:mysql:///wn32"
+            userId="root"
+            password="root" />
+
+        <!-- 放的是java实体类-->
+        <javaModelGenerator targetPackage="com.wn32.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!-- 放的是mapper的xml文件-->
+        <sqlMapGenerator targetPackage="com.wn32.mapper" targetProject="src/main/resources"/>
+
+        <!-- 放的是map接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.wn32.mapper" targetProject="src/main/java"/>
+
+        <!-- 要逆向的表,有几个表就写几个table-->
+        <table tableName="account" domainObjectName="Account"/>
+        <table tableName="student" domainObjectName="Student"/>
+    </context>
+</generatorConfiguration>
