@@ -18,7 +18,7 @@ import java.util.Date;
 public class FileUploadController {
     @RequestMapping("/fileUpload")
     public String detailFileUpLoad(MultipartFile uploadFile, HttpServletRequest request) throws IOException, Wn32Exception {
-//        //测试全局异常处理
+//        ////测试全局异常处理
 //        System.out.println("抛出自定义异常");
 //        throw new Wn32Exception();
 
