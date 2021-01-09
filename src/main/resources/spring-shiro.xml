@@ -14,7 +14,7 @@
         <!-- 针对有多个realm的情况-->
         <property name="realms">
             <array>
-                <ref bean="jdbcRealm"/>
+                <ref bean="UserRealm"/>
             </array>
         </property>
     </bean>
@@ -33,8 +33,15 @@
 
 
     <!-- 第四步：配置realm-->
-    <bean id="jdbcRealm" class="com.wn32.realm.FirstRealm">
-
+    <bean id="UserRealm" class="com.wn32.realm.UserRealm">
+        <!-- 凭证匹配器 ，Shiro的密码加密机制 -->
+        <property name="credentialsMatcher" >
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <!-- 迭代加密次数-->
+                <property name="hashIterations" value="1000"/>
+                <property name="hashAlgorithmName" value="MD5"/>
+            </bean>
+        </property>
     </bean>
 
     <!-- =========================================================
@@ -84,9 +91,12 @@
    -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <!--<property name="loginUrl" value="/s/login"/>
-        <property name="successUrl" value="/s/index"/>-->
-        <property name="unauthorizedUrl" value="/login.jsp"/>
+        <!-- 当shiro判断需要的登陆时，会跳转到该路径-->
+        <property name="loginUrl" value="/login.html"/>
+        <!-- 当shiro判断登陆成功后跳转-->
+        <property name="successUrl" value="/WEB-INF/templates/index.html"/>
+        <!-- 当未认证时 跳转到该路径-->
+        <property name="unauthorizedUrl" value="/login.html"/>
         <!-- The 'filters' property is not necessary since any declared javax.servlet.Filter bean
              defined will be automatically acquired and available via its beanName in chain
              definitions, but you can perform overrides or parent/child consolidated configuration
@@ -98,9 +108,9 @@
         </property> -->
         <property name="filterChainDefinitions">
             <value>
-                /index.html = anon
-<!--                /test.html = anon-->
-                # everything else requires authentication:
+                /login.html = anon
+                /user/login = anon
+                /user/loginout= logout
                 /** = authc
             </value>
         </property>

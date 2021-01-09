@@ -27,5 +27,6 @@
         <!-- 要逆向的表,有几个表就写几个table-->
         <table tableName="account" domainObjectName="Account"/>
         <table tableName="student" domainObjectName="Student"/>
+        <table tableName="_user" domainObjectName="User"/>
     </context>
 </generatorConfiguration>
